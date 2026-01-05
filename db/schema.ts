@@ -56,7 +56,7 @@ export const messages = pgTable('messages', {
     .references(() => users.id)
     .notNull(),
   content: text('content').notNull(), // can be empty for file-only messages
-  replyToId: uuid('reply_to_id').references(() => messages.id), // for threading
+  replyToId: uuid('reply_to_id').$type<string>(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
   deletedAt: timestamp('deleted_at'), // soft delete
@@ -140,10 +140,7 @@ export const messagesRelations = relations(messages, ({ one, many }) => ({
     fields: [messages.senderId],
     references: [users.id],
   }),
-  replyTo: one(messages, {
-    fields: [messages.replyToId],
-    references: [messages.id],
-  }),
+  // replyTo relation removed to avoid circular reference - can be queried manually
   assets: many(messageAssets),
   reactions: many(messageReactions),
   readReceipts: many(readReceipts),
