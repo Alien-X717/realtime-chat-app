@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "tsx watch server.ts",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production tsx server.ts",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
@@ -17,14 +17,18 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@socket.io/redis-adapter": "^8.3.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.1",
+    "ioredis": "^5.9.0",
     "lucide-react": "^0.562.0",
     "next": "16.1.1",
     "pg": "^8.16.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
@@ -34,10 +38,12 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
     "@testing-library/user-event": "^14.6.1",
+    "@types/ioredis": "^5.0.0",
     "@types/node": "^20",
     "@types/pg": "^8.16.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/socket.io": "^3.0.2",
     "@vitejs/plugin-react": "^5.1.2",
     "@vitest/ui": "^4.0.16",
     "drizzle-kit": "^0.31.8",

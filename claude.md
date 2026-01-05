@@ -22,7 +22,7 @@ Use conventional commits format:
 ### Branch Strategy
 - **NEVER merge directly to main**
 - Always create feature branches for new work
-- Branch naming: `feature/description` or `fix/description`
+- Branch naming: `feat-description` or `fix-description`
 - Raise PR (Pull Request) to merge to main
 - Delete feature branches after successful merge
 
