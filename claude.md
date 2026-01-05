@@ -30,6 +30,7 @@ Use conventional commits format:
 - **ALWAYS run typecheck before pushing to remote**: `yarn typecheck`
 - Ensure tests pass: `yarn test`
 - Fix any linting errors
+- Update docs and changelogs after changes
 
 ## Code Practices
 
