@@ -1,0 +1,74 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Testing
+coverage/
+.nyc_output/
+*.log
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Production
+/build
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Uploads
+uploads/
+*.upload
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Redis dump
+dump.rdb
+
+# Docker
+docker-compose.override.yml
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
