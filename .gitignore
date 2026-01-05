@@ -1,48 +1,42 @@
-# Dependencies
-node_modules/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
 /.pnp
-.pnp.js
+.pnp.*
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
-!.yarn/sdks
 !.yarn/versions
 
-# Testing
-coverage/
-.nyc_output/
-*.log
+# testing
+/coverage
 
-# Next.js
-.next/
-out/
-build/
-dist/
+# next.js
+/.next/
+/out/
 
-# Production
+# production
 /build
 
-# Misc
+# misc
 .DS_Store
 *.pem
 
-# Debug
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
-# Local env files
-.env
-.env*.local
-.env.development.local
-.env.test.local
-.env.production.local
+# env files (can opt-in for committing if needed)
+.env*
 
-# Vercel
+# vercel
 .vercel
 
-# TypeScript
+# typescript
 *.tsbuildinfo
 next-env.d.ts
 
@@ -53,22 +47,22 @@ next-env.d.ts
 *.swo
 *~
 
-# Uploads
+# file uploads
 uploads/
 *.upload
 
-# Database
+# database
 *.db
 *.sqlite
 *.sqlite3
 
-# Redis dump
+# redis
 dump.rdb
 
-# Docker
+# docker
 docker-compose.override.yml
 
-# Playwright
+# playwright
 test-results/
 playwright-report/
 playwright/.cache/
