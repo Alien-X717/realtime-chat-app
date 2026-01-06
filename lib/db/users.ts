@@ -1,6 +1,7 @@
+import { eq, sql } from 'drizzle-orm'
+
 import { db } from '@/db'
 import { users } from '@/db/schema'
-import { eq, sql } from 'drizzle-orm'
 
 export interface CreateUserData {
   username: string

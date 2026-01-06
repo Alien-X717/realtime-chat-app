@@ -14,9 +14,7 @@ async function initDatabase() {
     const dbName = process.env.POSTGRES_DB || 'realtime_chat_app'
 
     // Check if database exists
-    const result = await pool.query(
-      `SELECT 1 FROM pg_database WHERE datname='${dbName}'`
-    )
+    const result = await pool.query(`SELECT 1 FROM pg_database WHERE datname='${dbName}'`)
 
     if (result.rowCount === 0) {
       // Create database if it doesn't exist

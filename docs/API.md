@@ -3,11 +3,13 @@
 ## Authentication Endpoints
 
 ### POST /api/auth/signup
+
 **Status:** 🚧 In Development
 
 Register a new user account.
 
 **Request Body:**
+
 ```json
 {
   "username": "string (required, unique)",
@@ -18,6 +20,7 @@ Register a new user account.
 ```
 
 **Response (201):**
+
 ```json
 {
   "user": {
@@ -32,17 +35,20 @@ Register a new user account.
 ```
 
 **Errors:**
+
 - 400: Invalid input, password too weak, username/email already exists
 - 500: Server error
 
 ---
 
 ### POST /api/auth/login
+
 **Status:** 🚧 In Development
 
 Authenticate user and receive tokens.
 
 **Request Body:**
+
 ```json
 {
   "email": "string (required)",
@@ -51,6 +57,7 @@ Authenticate user and receive tokens.
 ```
 
 **Response (200):**
+
 ```json
 {
   "user": {
@@ -64,9 +71,11 @@ Authenticate user and receive tokens.
 ```
 
 **Sets Cookies:**
+
 - `refreshToken` - HttpOnly, 7 days expiry
 
 **Errors:**
+
 - 400: Invalid input
 - 401: Invalid credentials
 - 500: Server error
@@ -74,14 +83,17 @@ Authenticate user and receive tokens.
 ---
 
 ### POST /api/auth/logout
+
 **Status:** 🚧 In Development
 
 Logout user and clear tokens.
 
 **Headers:**
+
 - `Authorization: Bearer <accessToken>`
 
 **Response (200):**
+
 ```json
 {
   "message": "Logged out successfully"
@@ -91,14 +103,17 @@ Logout user and clear tokens.
 ---
 
 ### GET /api/auth/me
+
 **Status:** 🚧 In Development
 
 Get current authenticated user information.
 
 **Headers:**
+
 - `Authorization: Bearer <accessToken>`
 
 **Response (200):**
+
 ```json
 {
   "id": "uuid",
@@ -111,6 +126,7 @@ Get current authenticated user information.
 ```
 
 **Errors:**
+
 - 401: Unauthorized (invalid or expired token)
 - 500: Server error
 
@@ -122,7 +138,7 @@ Get current authenticated user information.
 - At least one uppercase letter
 - At least one lowercase letter
 - At least one number
-- At least one special character (!@#$%^&*()_+-=[]{}; ':"\\|,.<>/?)
+- At least one special character (!@#$%^&\*()\_+-=[]{}; ':"\\|,.<>/?)
 
 ---
 
@@ -147,6 +163,7 @@ Get current authenticated user information.
 ## WebSocket Events
 
 ### Authentication
+
 **Status:** 🚧 In Development
 
 Socket.io connections must include valid JWT token for authentication.
@@ -154,11 +171,11 @@ Socket.io connections must include valid JWT token for authentication.
 ```javascript
 const socket = io('http://localhost:3000', {
   auth: {
-    token: '<accessToken>'
-  }
-});
+    token: '<accessToken>',
+  },
+})
 ```
 
 ---
 
-*More endpoints will be documented as they are implemented.*
+_More endpoints will be documented as they are implemented._
