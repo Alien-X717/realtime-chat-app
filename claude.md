@@ -72,7 +72,7 @@ Use conventional commits format:
 
 ## Tech Stack
 
-- **Frontend**: Next.js 14+ (App Router), React, TypeScript
+- **Frontend**: Next.js 16+ (App Router), React, Type Script
 - **UI**: Shadcn UI, Tailwind CSS
 - **Backend**: Next.js API Routes, Socket.io
 - **Database**: PostgreSQL + Drizzle ORM
