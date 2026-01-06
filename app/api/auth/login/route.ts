@@ -3,6 +3,13 @@ import { findUserByEmail } from '@/lib/db/users'
 import { verifyPassword } from '@/lib/auth/password'
 import { generateAccessToken, generateRefreshToken } from '@/lib/auth/jwt'
 
+class AuthError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'AuthError'
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -19,19 +26,13 @@ export async function POST(request: NextRequest) {
     // Find user by email (case-insensitive)
     const user = await findUserByEmail(email)
     if (!user) {
-      return NextResponse.json(
-        { error: 'Invalid email or password' },
-        { status: 401 }
-      )
+      throw new AuthError('Invalid email or password')
     }
 
     // Verify password
     const isPasswordValid = await verifyPassword(user.passwordHash, password)
     if (!isPasswordValid) {
-      return NextResponse.json(
-        { error: 'Invalid email or password' },
-        { status: 401 }
-      )
+      throw new AuthError('Invalid email or password')
     }
 
     // Generate tokens
@@ -63,7 +64,9 @@ export async function POST(request: NextRequest) {
 
     return response
   } catch (error) {
-    console.error('Login error:', error)
+    if (error instanceof AuthError) {
+      return NextResponse.json({ error: error.message }, { status: 401 })
+    }
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
