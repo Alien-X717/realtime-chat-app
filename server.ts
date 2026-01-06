@@ -4,6 +4,8 @@ import next from 'next'
 import { Server as SocketIOServer } from 'socket.io'
 import { createAdapter } from '@socket.io/redis-adapter'
 import Redis from 'ioredis'
+import { authMiddleware } from './lib/socket/auth-middleware'
+import './lib/socket/types' // Import Socket.io type augmentation
 
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = 'localhost'
@@ -46,9 +48,13 @@ app.prepare().then(() => {
     console.log('✓ Socket.io Redis adapter initialized')
   })
 
+  // Apply authentication middleware
+  io.use(authMiddleware)
+
   // Socket.io connection handling
   io.on('connection', (socket) => {
-    console.log(`✓ Client connected: ${socket.id}`)
+    const user = socket.data.user
+    console.log(`✓ Client connected: ${socket.id}, user: ${user.email} (${user.userId})`)
 
     // Handle disconnection
     socket.on('disconnect', (reason) => {
