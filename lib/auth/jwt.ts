@@ -16,10 +16,7 @@ export interface RefreshTokenPayload {
 /**
  * Generate an access token (short-lived: 15 minutes)
  */
-export function generateAccessToken(payload: {
-  userId: string
-  email: string
-}): string {
+export function generateAccessToken(payload: { userId: string; email: string }): string {
   const secret = process.env.JWT_ACCESS_SECRET
   if (!secret) {
     throw new Error('JWT_ACCESS_SECRET is not defined')

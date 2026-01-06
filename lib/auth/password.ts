@@ -24,10 +24,7 @@ export async function hashPassword(password: string): Promise<string> {
  * @param password - Plain text password to verify
  * @returns Promise<boolean> - True if password matches
  */
-export async function verifyPassword(
-  hash: string,
-  password: string
-): Promise<boolean> {
+export async function verifyPassword(hash: string, password: string): Promise<boolean> {
   if (!password || password.length === 0) {
     return false
   }

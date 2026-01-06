@@ -1,14 +1,12 @@
-import { ReactElement } from 'react'
-import { render, RenderOptions } from '@testing-library/react'
+import type { RenderOptions } from '@testing-library/react';
+import { render } from '@testing-library/react'
+import type { ReactElement } from 'react'
 
 /**
  * Custom render function that wraps components with necessary providers
  * Add providers here as the app grows (AuthProvider, ThemeProvider, etc.)
  */
-function customRender(
-  ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>
-) {
+function customRender(ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) {
   return render(ui, { ...options })
 }
 

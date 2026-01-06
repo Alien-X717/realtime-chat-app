@@ -1,8 +1,11 @@
 import { describe, it, expect, beforeEach, afterAll } from 'vitest'
+
 import { db, pool } from '@/db'
 import { users } from '@/db/schema'
-import { createUser, findUserByEmail, findUserById, updateUser } from './users'
+
 import { hashPassword } from '../auth/password'
+
+import { createUser, findUserByEmail, findUserById, updateUser } from './users'
 
 describe('User Database Operations', () => {
   // Clean up test users after all tests
@@ -146,9 +149,7 @@ describe('User Database Operations', () => {
     })
 
     it('should return null for non-existent ID', async () => {
-      const foundUser = await findUserById(
-        '00000000-0000-0000-0000-000000000000'
-      )
+      const foundUser = await findUserById('00000000-0000-0000-0000-000000000000')
 
       expect(foundUser).toBeNull()
     })
@@ -191,10 +192,9 @@ describe('User Database Operations', () => {
     })
 
     it('should return null for non-existent user', async () => {
-      const updatedUser = await updateUser(
-        '00000000-0000-0000-0000-000000000000',
-        { displayName: 'Test' }
-      )
+      const updatedUser = await updateUser('00000000-0000-0000-0000-000000000000', {
+        displayName: 'Test',
+      })
 
       expect(updatedUser).toBeNull()
     })

@@ -1,9 +1,10 @@
 import { createServer } from 'http'
 import { parse } from 'url'
-import next from 'next'
-import { Server as SocketIOServer } from 'socket.io'
+
 import { createAdapter } from '@socket.io/redis-adapter'
 import Redis from 'ioredis'
+import next from 'next'
+import { Server as SocketIOServer } from 'socket.io'
 
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = 'localhost'
