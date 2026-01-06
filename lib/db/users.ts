@@ -49,12 +49,39 @@ export async function findUserByEmail(email: string) {
 }
 
 /**
+ * Alias for findUserByEmail
+ */
+export async function getUserByEmail(email: string) {
+  return findUserByEmail(email)
+}
+
+/**
+ * Find user by username
+ */
+export async function getUserByUsername(username: string) {
+  const [user] = await db
+    .select()
+    .from(users)
+    .where(sql`LOWER(${users.username}) = LOWER(${username})`)
+    .limit(1)
+
+  return user || null
+}
+
+/**
  * Find user by ID
  */
 export async function findUserById(id: string) {
   const [user] = await db.select().from(users).where(eq(users.id, id)).limit(1)
 
   return user || null
+}
+
+/**
+ * Alias for findUserById
+ */
+export async function getUserById(id: string) {
+  return findUserById(id)
 }
 
 /**
