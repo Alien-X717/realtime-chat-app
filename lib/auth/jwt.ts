@@ -26,7 +26,7 @@ export function generateAccessToken(payload: {
   }
 
   const expiresIn = process.env.JWT_ACCESS_EXPIRY || '15m'
-
+  // @ts-expect-error - jsonwebtoken types expect StringValue but process.env returns string
   return jwt.sign(payload, secret, { expiresIn })
 }
 
@@ -40,7 +40,7 @@ export function generateRefreshToken(payload: { userId: string }): string {
   }
 
   const expiresIn = process.env.JWT_REFRESH_EXPIRY || '7d'
-
+  // @ts-expect-error - jsonwebtoken types expect StringValue but process.env returns string
   return jwt.sign(payload, secret, { expiresIn })
 }
 
