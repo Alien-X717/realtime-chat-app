@@ -95,7 +95,9 @@ describe('GET /api/conversations/[id]/messages', () => {
       }
     )
 
-    const response = await GET(request, { params: Promise.resolve({ id: testConversationId }) })
+    const response = await GET(request, {
+      params: Promise.resolve({ id: testConversationId }),
+    })
     const data = await response.json()
 
     expect(response.status).toBe(200)
@@ -116,7 +118,9 @@ describe('GET /api/conversations/[id]/messages', () => {
       }
     )
 
-    const response = await GET(request, { params: Promise.resolve({ id: testConversationId }) })
+    const response = await GET(request, {
+      params: Promise.resolve({ id: testConversationId }),
+    })
     const data = await response.json()
 
     expect(response.status).toBe(200)
@@ -130,7 +134,9 @@ describe('GET /api/conversations/[id]/messages', () => {
       `http://localhost:3000/api/conversations/${testConversationId}/messages`
     )
 
-    const response = await GET(request, { params: Promise.resolve({ id: testConversationId }) })
+    const response = await GET(request, {
+      params: Promise.resolve({ id: testConversationId }),
+    })
     const data = await response.json()
 
     expect(response.status).toBe(401)
@@ -160,7 +166,9 @@ describe('GET /api/conversations/[id]/messages', () => {
       }
     )
 
-    const response = await GET(request, { params: Promise.resolve({ id: testConversationId }) })
+    const response = await GET(request, {
+      params: Promise.resolve({ id: testConversationId }),
+    })
     const data = await response.json()
 
     expect(response.status).toBe(403)

@@ -16,10 +16,7 @@ export function TypingIndicator({ conversationId }: TypingIndicatorProps) {
 
   useEffect(() => {
     const unsubStart = onTypingStart((event) => {
-      if (
-        event.conversationId === conversationId &&
-        event.userId !== user?.id
-      ) {
+      if (event.conversationId === conversationId && event.userId !== user?.id) {
         setTypingUsers((prev) => new Set([...prev, event.userId]))
       }
     })
@@ -45,12 +42,21 @@ export function TypingIndicator({ conversationId }: TypingIndicatorProps) {
   }
 
   return (
-    <div className="px-4 py-2 text-sm text-muted-foreground">
+    <div className="text-muted-foreground px-4 py-2 text-sm">
       <span className="inline-flex items-center gap-1">
         <span className="flex gap-1">
-          <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-          <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-          <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+          <span
+            className="bg-muted-foreground h-2 w-2 animate-bounce rounded-full"
+            style={{ animationDelay: '0ms' }}
+          />
+          <span
+            className="bg-muted-foreground h-2 w-2 animate-bounce rounded-full"
+            style={{ animationDelay: '150ms' }}
+          />
+          <span
+            className="bg-muted-foreground h-2 w-2 animate-bounce rounded-full"
+            style={{ animationDelay: '300ms' }}
+          />
         </span>
         <span className="ml-2">
           {typingUsers.size === 1

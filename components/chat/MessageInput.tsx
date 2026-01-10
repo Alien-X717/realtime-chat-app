@@ -87,7 +87,7 @@ export function MessageInput({ conversationId, disabled }: MessageInputProps) {
   )
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 p-4 border-t">
+    <form onSubmit={handleSubmit} className="flex gap-2 border-t p-4">
       <Input
         type="text"
         placeholder={isConnected ? 'Type a message...' : 'Connecting...'}

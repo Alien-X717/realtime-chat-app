@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -11,99 +11,98 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useAuth } from '@/hooks/useAuth';
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { useAuth } from '@/hooks/useAuth'
 
 interface SignupFormData {
-  username: string;
-  email: string;
-  password: string;
-  displayName: string;
+  username: string
+  email: string
+  password: string
+  displayName: string
 }
 
 interface FormErrors {
-  username?: string;
-  email?: string;
-  password?: string;
-  displayName?: string;
-  general?: string;
+  username?: string
+  email?: string
+  password?: string
+  displayName?: string
+  general?: string
 }
 
 export function SignupForm() {
-  const router = useRouter();
-  const { signup } = useAuth();
+  const router = useRouter()
+  const { signup } = useAuth()
   const [formData, setFormData] = useState<SignupFormData>({
     username: '',
     email: '',
     password: '',
     displayName: '',
-  });
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [isLoading, setIsLoading] = useState(false);
+  })
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [isLoading, setIsLoading] = useState(false)
 
   const validatePassword = (password: string): string | undefined => {
     if (!password) {
-      return 'Password is required';
+      return 'Password is required'
     }
     if (password.length < 8) {
-      return 'Password must be at least 8 characters';
+      return 'Password must be at least 8 characters'
     }
     if (!/[A-Z]/.test(password)) {
-      return 'Password must contain at least one uppercase letter';
+      return 'Password must contain at least one uppercase letter'
     }
     if (!/[a-z]/.test(password)) {
-      return 'Password must contain at least one lowercase letter';
+      return 'Password must contain at least one lowercase letter'
     }
     if (!/[0-9]/.test(password)) {
-      return 'Password must contain at least one number';
+      return 'Password must contain at least one number'
     }
     if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) {
-      return 'Password must contain at least one special character';
+      return 'Password must contain at least one special character'
     }
-    return undefined;
-  };
+    return undefined
+  }
 
   const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
+    const newErrors: FormErrors = {}
 
     // Username validation
     if (!formData.username) {
-      newErrors.username = 'Username is required';
+      newErrors.username = 'Username is required'
     } else if (formData.username.length < 3) {
-      newErrors.username = 'Username must be at least 3 characters';
+      newErrors.username = 'Username must be at least 3 characters'
     } else if (!/^[a-zA-Z0-9_]+$/.test(formData.username)) {
-      newErrors.username =
-        'Username can only contain letters, numbers, and underscores';
+      newErrors.username = 'Username can only contain letters, numbers, and underscores'
     }
 
     // Email validation
     if (!formData.email) {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'Email is required'
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = 'Please enter a valid email address'
     }
 
     // Password validation
-    const passwordError = validatePassword(formData.password);
+    const passwordError = validatePassword(formData.password)
     if (passwordError) {
-      newErrors.password = passwordError;
+      newErrors.password = passwordError
     }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrors({});
+    e.preventDefault()
+    setErrors({})
 
     if (!validateForm()) {
-      return;
+      return
     }
 
-    setIsLoading(true);
+    setIsLoading(true)
 
     try {
       await signup({
@@ -111,26 +110,25 @@ export function SignupForm() {
         email: formData.email,
         password: formData.password,
         displayName: formData.displayName || formData.username,
-      });
-      router.push('/');
+      })
+      router.push('/')
     } catch (error) {
       setErrors({
-        general:
-          error instanceof Error ? error.message : 'Failed to create account',
-      });
+        general: error instanceof Error ? error.message : 'Failed to create account',
+      })
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
     // Clear error for this field when user starts typing
     if (errors[name as keyof FormErrors]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
+      setErrors((prev) => ({ ...prev, [name]: undefined }))
     }
-  };
+  }
 
   return (
     <Card className="w-full max-w-md">
@@ -141,7 +139,7 @@ export function SignupForm() {
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           {errors.general && (
-            <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">
+            <div className="bg-destructive/15 text-destructive rounded-md p-3 text-sm">
               {errors.general}
             </div>
           )}
@@ -160,7 +158,7 @@ export function SignupForm() {
               aria-describedby={errors.username ? 'username-error' : undefined}
             />
             {errors.username && (
-              <p id="username-error" className="text-sm text-destructive">
+              <p id="username-error" className="text-destructive text-sm">
                 {errors.username}
               </p>
             )}
@@ -180,7 +178,7 @@ export function SignupForm() {
               aria-describedby={errors.email ? 'email-error' : undefined}
             />
             {errors.email && (
-              <p id="email-error" className="text-sm text-destructive">
+              <p id="email-error" className="text-destructive text-sm">
                 {errors.email}
               </p>
             )}
@@ -213,13 +211,13 @@ export function SignupForm() {
               aria-describedby={errors.password ? 'password-error' : undefined}
             />
             {errors.password && (
-              <p id="password-error" className="text-sm text-destructive">
+              <p id="password-error" className="text-destructive text-sm">
                 {errors.password}
               </p>
             )}
-            <p className="text-xs text-muted-foreground">
-              Password must be at least 8 characters with uppercase, lowercase,
-              number, and special character
+            <p className="text-muted-foreground text-xs">
+              Password must be at least 8 characters with uppercase, lowercase, number,
+              and special character
             </p>
           </div>
         </CardContent>
@@ -228,17 +226,14 @@ export function SignupForm() {
           <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? 'Creating account...' : 'Sign Up'}
           </Button>
-          <p className="text-center text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-center text-sm">
             Already have an account?{' '}
-            <a
-              href="/login"
-              className="font-medium text-primary hover:underline"
-            >
+            <a href="/login" className="text-primary font-medium hover:underline">
               Login
             </a>
           </p>
         </CardFooter>
       </form>
     </Card>
-  );
+  )
 }

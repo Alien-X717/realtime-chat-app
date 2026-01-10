@@ -1,36 +1,36 @@
-'use client';
+'use client'
 
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
-import { LoginForm } from '@/components/auth/LoginForm';
-import { useAuth } from '@/hooks/useAuth';
+import { LoginForm } from '@/components/auth/LoginForm'
+import { useAuth } from '@/hooks/useAuth'
 
 export default function LoginPage() {
-  const router = useRouter();
-  const { user, loading } = useAuth();
+  const router = useRouter()
+  const { user, loading } = useAuth()
 
   useEffect(() => {
     if (!loading && user) {
-      router.push('/');
+      router.push('/')
     }
-  }, [user, loading, router]);
+  }, [user, loading, router])
 
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-muted-foreground">Loading...</div>
       </div>
-    );
+    )
   }
 
   if (user) {
-    return null; // Will redirect in useEffect
+    return null // Will redirect in useEffect
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black px-4">
+    <div className="flex min-h-screen items-center justify-center bg-zinc-50 px-4 dark:bg-black">
       <LoginForm />
     </div>
-  );
+  )
 }

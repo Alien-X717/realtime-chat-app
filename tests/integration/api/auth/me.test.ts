@@ -9,7 +9,6 @@ import { generateAccessToken } from '@/lib/auth/jwt'
 import { hashPassword } from '@/lib/auth/password'
 import { createUser } from '@/lib/db/users'
 
-
 describe('GET /api/auth/me', () => {
   let testUserId: string
   let testAccessToken: string

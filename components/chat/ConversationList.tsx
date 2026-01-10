@@ -56,7 +56,7 @@ export function ConversationList({ selectedId, onSelect }: ConversationListProps
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className="flex h-full items-center justify-center">
         <div className="text-muted-foreground">Loading conversations...</div>
       </div>
     )
@@ -64,7 +64,7 @@ export function ConversationList({ selectedId, onSelect }: ConversationListProps
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className="flex h-full items-center justify-center">
         <div className="text-destructive">{error}</div>
       </div>
     )
@@ -72,7 +72,7 @@ export function ConversationList({ selectedId, onSelect }: ConversationListProps
 
   if (conversations.length === 0) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className="flex h-full items-center justify-center">
         <div className="text-muted-foreground">No conversations yet</div>
       </div>
     )
@@ -92,11 +92,9 @@ export function ConversationList({ selectedId, onSelect }: ConversationListProps
         >
           <div className="flex w-full items-center justify-between">
             <span className="font-medium">
-              {conversation.type === 'group'
-                ? conversation.name
-                : 'Direct Message'}
+              {conversation.type === 'group' ? conversation.name : 'Direct Message'}
             </span>
-            <span className="text-xs text-muted-foreground">
+            <span className="text-muted-foreground text-xs">
               {conversation.type === 'group' ? 'Group' : 'DM'}
             </span>
           </div>

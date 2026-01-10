@@ -10,7 +10,6 @@ import { authMiddleware } from './lib/socket/auth-middleware'
 import { registerMessageEvents } from './lib/socket/message-events'
 import './lib/socket/types' // Import Socket.io type augmentation
 
-
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = 'localhost'
 const port = Number(process.env.PORT) || 3000

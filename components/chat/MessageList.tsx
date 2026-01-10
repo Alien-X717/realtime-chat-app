@@ -99,7 +99,7 @@ export function MessageList({ conversationId }: MessageListProps) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className="flex h-full items-center justify-center">
         <div className="text-muted-foreground">Loading messages...</div>
       </div>
     )
@@ -107,7 +107,7 @@ export function MessageList({ conversationId }: MessageListProps) {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className="flex h-full items-center justify-center">
         <div className="text-destructive">{error}</div>
       </div>
     )
@@ -115,7 +115,7 @@ export function MessageList({ conversationId }: MessageListProps) {
 
   if (messages.length === 0) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className="flex h-full items-center justify-center">
         <div className="text-muted-foreground">
           No messages yet. Start the conversation!
         </div>
@@ -124,23 +124,23 @@ export function MessageList({ conversationId }: MessageListProps) {
   }
 
   return (
-    <div className="flex flex-col gap-2 p-4 overflow-y-auto">
+    <div className="flex flex-col gap-2 overflow-y-auto p-4">
       {messages.map((message) => {
         const isOwn = message.senderId === user?.id
         return (
           <div
             key={message.id}
             className={cn(
-              'flex flex-col max-w-[70%] rounded-lg p-3',
+              'flex max-w-[70%] flex-col rounded-lg p-3',
               isOwn
-                ? 'self-end bg-primary text-primary-foreground'
-                : 'self-start bg-muted'
+                ? 'bg-primary text-primary-foreground self-end'
+                : 'bg-muted self-start'
             )}
           >
             <p className="text-sm">{message.content}</p>
             <span
               className={cn(
-                'text-xs mt-1',
+                'mt-1 text-xs',
                 isOwn ? 'text-primary-foreground/70' : 'text-muted-foreground'
               )}
             >

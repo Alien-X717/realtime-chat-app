@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useCallback, useState } from 'react'
-import type { Socket } from 'socket.io-client';
+import type { Socket } from 'socket.io-client'
 import { io } from 'socket.io-client'
 
 import { useAuth } from './useAuth'
@@ -83,29 +83,26 @@ export function useSocket(): UseSocketReturn {
   }, [accessToken])
 
   // Join a conversation room
-  const joinConversation = useCallback(
-    async (conversationId: string): Promise<void> => {
-      return new Promise((resolve, reject) => {
-        if (!socketRef.current?.connected) {
-          reject(new Error('Socket not connected'))
-          return
-        }
+  const joinConversation = useCallback(async (conversationId: string): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      if (!socketRef.current?.connected) {
+        reject(new Error('Socket not connected'))
+        return
+      }
 
-        socketRef.current.emit(
-          'conversation:join',
-          conversationId,
-          (response: { success?: boolean; error?: string }) => {
-            if (response.error) {
-              reject(new Error(response.error))
-            } else {
-              resolve()
-            }
+      socketRef.current.emit(
+        'conversation:join',
+        conversationId,
+        (response: { success?: boolean; error?: string }) => {
+          if (response.error) {
+            reject(new Error(response.error))
+          } else {
+            resolve()
           }
-        )
-      })
-    },
-    []
-  )
+        }
+      )
+    })
+  }, [])
 
   // Leave a conversation room
   const leaveConversation = useCallback((conversationId: string) => {

@@ -1,4 +1,4 @@
-import type { NextRequest} from 'next/server';
+import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
 import { authenticateRequest, AuthenticationError } from '@/lib/auth/middleware'
@@ -35,7 +35,9 @@ export async function POST(request: NextRequest) {
     }
 
     if (content === undefined) {
-      throw new ValidationError('Content is required (can be empty for file-only messages)')
+      throw new ValidationError(
+        'Content is required (can be empty for file-only messages)'
+      )
     }
 
     // Check if user is a participant in the conversation
