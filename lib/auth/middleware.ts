@@ -1,5 +1,14 @@
-import { NextRequest } from 'next/server'
-import { verifyAccessToken, AccessTokenPayload } from './jwt'
+import type { NextRequest } from 'next/server'
+
+import type { AccessTokenPayload } from './jwt';
+import { verifyAccessToken } from './jwt'
+
+export class AuthenticationError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'AuthenticationError'
+  }
+}
 
 /**
  * Extract and verify user from Authorization header
@@ -33,4 +42,18 @@ export function extractUserFromRequest(
   } catch (error) {
     return null
   }
+}
+
+/**
+ * Authenticate request or throw error
+ * Throws AuthenticationError if request is not authenticated
+ */
+export function authenticateRequest(request: NextRequest): AccessTokenPayload {
+  const user = extractUserFromRequest(request)
+
+  if (!user) {
+    throw new AuthenticationError('Unauthorized')
+  }
+
+  return user
 }

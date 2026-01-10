@@ -5,7 +5,9 @@ import { createAdapter } from '@socket.io/redis-adapter'
 import Redis from 'ioredis'
 import next from 'next'
 import { Server as SocketIOServer } from 'socket.io'
+
 import { authMiddleware } from './lib/socket/auth-middleware'
+import { registerMessageEvents } from './lib/socket/message-events'
 import './lib/socket/types' // Import Socket.io type augmentation
 
 
@@ -58,12 +60,13 @@ app.prepare().then(() => {
     const user = socket.data.user
     console.log(`✓ Client connected: ${socket.id}, user: ${user.email} (${user.userId})`)
 
+    // Register message event handlers
+    registerMessageEvents(socket, io)
+
     // Handle disconnection
     socket.on('disconnect', (reason) => {
       console.log(`✗ Client disconnected: ${socket.id}, reason: ${reason}`)
     })
-
-    // Add more socket event handlers here as we build features
   })
 
   // Start server

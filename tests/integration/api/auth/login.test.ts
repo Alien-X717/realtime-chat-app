@@ -1,10 +1,11 @@
+import { NextRequest } from 'next/server'
 import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
+
 import { POST as LoginPOST } from '@/app/api/auth/login/route'
 import { db, pool } from '@/db'
 import { users } from '@/db/schema'
-import { NextRequest } from 'next/server'
-import { createUser } from '@/lib/db/users'
 import { hashPassword } from '@/lib/auth/password'
+import { createUser } from '@/lib/db/users'
 
 describe('POST /api/auth/login', () => {
   // Set up test environment variables

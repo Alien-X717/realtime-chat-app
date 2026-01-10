@@ -1,4 +1,4 @@
-import { AccessTokenPayload } from '../auth/jwt'
+import type { AccessTokenPayload } from '../auth/jwt'
 
 /**
  * Augment Socket.io's Socket interface to include user data
