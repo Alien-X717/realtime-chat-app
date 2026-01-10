@@ -5,6 +5,7 @@ import { createAdapter } from '@socket.io/redis-adapter'
 import Redis from 'ioredis'
 import next from 'next'
 import { Server as SocketIOServer } from 'socket.io'
+
 import { authMiddleware } from './lib/socket/auth-middleware'
 import { registerMessageEvents } from './lib/socket/message-events'
 import './lib/socket/types' // Import Socket.io type augmentation

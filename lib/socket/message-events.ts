@@ -1,6 +1,7 @@
-import { Socket, Server } from 'socket.io'
-import { createMessage } from '../db/messages'
+import type { Socket, Server } from 'socket.io'
+
 import { isParticipant } from '../db/conversations'
+import { createMessage } from '../db/messages'
 
 /**
  * Socket.io event handlers for real-time messaging

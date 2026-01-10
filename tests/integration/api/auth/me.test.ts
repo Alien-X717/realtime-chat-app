@@ -1,12 +1,14 @@
+import { eq } from 'drizzle-orm'
+import { NextRequest } from 'next/server'
 import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
+
 import { GET } from '@/app/api/auth/me/route'
 import { db, pool } from '@/db'
 import { users } from '@/db/schema'
-import { NextRequest } from 'next/server'
-import { createUser } from '@/lib/db/users'
-import { hashPassword } from '@/lib/auth/password'
 import { generateAccessToken } from '@/lib/auth/jwt'
-import { eq } from 'drizzle-orm'
+import { hashPassword } from '@/lib/auth/password'
+import { createUser } from '@/lib/db/users'
+
 
 describe('GET /api/auth/me', () => {
   let testUserId: string

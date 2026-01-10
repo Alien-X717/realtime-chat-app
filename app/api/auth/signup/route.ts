@@ -1,7 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { createUser, findUserByEmail } from '@/lib/db/users'
-import { hashPassword, validatePassword } from '@/lib/auth/password'
+import type { NextRequest} from 'next/server';
+import { NextResponse } from 'next/server'
+
 import { generateAccessToken, generateRefreshToken } from '@/lib/auth/jwt'
+import { hashPassword, validatePassword } from '@/lib/auth/password'
+import { createUser, findUserByEmail } from '@/lib/db/users'
 
 export async function POST(request: NextRequest) {
   try {
@@ -86,10 +88,11 @@ export async function POST(request: NextRequest) {
       })
 
       return response
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Handle duplicate username/email errors from database
       // Check both error.code and error.cause.code for PostgreSQL errors
-      const errorCode = error.code || error.cause?.code
+      const err = error as { code?: string; cause?: { code?: string } }
+      const errorCode = err.code || err.cause?.code
       if (errorCode === '23505') {
         // PostgreSQL unique violation
         return NextResponse.json(

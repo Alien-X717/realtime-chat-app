@@ -1,5 +1,7 @@
-import { NextRequest } from 'next/server'
-import { verifyAccessToken, AccessTokenPayload } from './jwt'
+import type { NextRequest } from 'next/server'
+
+import type { AccessTokenPayload } from './jwt';
+import { verifyAccessToken } from './jwt'
 
 export class AuthenticationError extends Error {
   constructor(message: string) {

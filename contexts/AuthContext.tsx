@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useCallback, useEffect, useState } from 'react';
+
 import type {
   AuthContextType,
   AuthState,

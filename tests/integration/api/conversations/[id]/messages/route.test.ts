@@ -1,13 +1,14 @@
+import { NextRequest } from 'next/server'
 import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
+
 import { GET } from '@/app/api/conversations/[id]/messages/route'
 import { db, pool } from '@/db'
 import { users, conversations, conversationParticipants, messages } from '@/db/schema'
-import { NextRequest } from 'next/server'
-import { createUser } from '@/lib/db/users'
+import { generateAccessToken } from '@/lib/auth/jwt'
+import { hashPassword } from '@/lib/auth/password'
 import { createConversation } from '@/lib/db/conversations'
 import { createMessage } from '@/lib/db/messages'
-import { hashPassword } from '@/lib/auth/password'
-import { generateAccessToken } from '@/lib/auth/jwt'
+import { createUser } from '@/lib/db/users'
 
 describe('GET /api/conversations/[id]/messages', () => {
   let testUser1Id: string
@@ -94,7 +95,7 @@ describe('GET /api/conversations/[id]/messages', () => {
       }
     )
 
-    const response = await GET(request, { params: { id: testConversationId } })
+    const response = await GET(request, { params: Promise.resolve({ id: testConversationId }) })
     const data = await response.json()
 
     expect(response.status).toBe(200)
@@ -115,7 +116,7 @@ describe('GET /api/conversations/[id]/messages', () => {
       }
     )
 
-    const response = await GET(request, { params: { id: testConversationId } })
+    const response = await GET(request, { params: Promise.resolve({ id: testConversationId }) })
     const data = await response.json()
 
     expect(response.status).toBe(200)
@@ -129,7 +130,7 @@ describe('GET /api/conversations/[id]/messages', () => {
       `http://localhost:3000/api/conversations/${testConversationId}/messages`
     )
 
-    const response = await GET(request, { params: { id: testConversationId } })
+    const response = await GET(request, { params: Promise.resolve({ id: testConversationId }) })
     const data = await response.json()
 
     expect(response.status).toBe(401)
@@ -159,7 +160,7 @@ describe('GET /api/conversations/[id]/messages', () => {
       }
     )
 
-    const response = await GET(request, { params: { id: testConversationId } })
+    const response = await GET(request, { params: Promise.resolve({ id: testConversationId }) })
     const data = await response.json()
 
     expect(response.status).toBe(403)
@@ -177,7 +178,7 @@ describe('GET /api/conversations/[id]/messages', () => {
     )
 
     const response = await GET(request, {
-      params: { id: '00000000-0000-0000-0000-000000000000' },
+      params: Promise.resolve({ id: '00000000-0000-0000-0000-000000000000' }),
     })
     const data = await response.json()
 

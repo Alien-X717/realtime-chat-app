@@ -1,7 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
+import type { NextRequest} from 'next/server';
+import { NextResponse } from 'next/server'
+
 import { authenticateRequest, AuthenticationError } from '@/lib/auth/middleware'
-import { createMessage } from '@/lib/db/messages'
 import { isParticipant } from '@/lib/db/conversations'
+import { createMessage } from '@/lib/db/messages'
 
 class ValidationError extends Error {
   constructor(message: string) {

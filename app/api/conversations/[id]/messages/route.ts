@@ -1,7 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
+import type { NextRequest} from 'next/server';
+import { NextResponse } from 'next/server'
+
 import { authenticateRequest, AuthenticationError } from '@/lib/auth/middleware'
-import { getConversationMessages } from '@/lib/db/messages'
 import { isParticipant, findConversationById } from '@/lib/db/conversations'
+import { getConversationMessages } from '@/lib/db/messages'
 
 class ForbiddenError extends Error {
   constructor(message: string) {
@@ -23,11 +25,11 @@ class NotFoundError extends Error {
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await authenticateRequest(request)
-    const conversationId = params.id
+    const { id: conversationId } = await params
 
     // Check if conversation exists
     const conversation = await findConversationById(conversationId)

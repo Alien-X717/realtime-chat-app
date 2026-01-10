@@ -1,7 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { findUserByEmail } from '@/lib/db/users'
-import { verifyPassword } from '@/lib/auth/password'
+import type { NextRequest} from 'next/server';
+import { NextResponse } from 'next/server'
+
 import { generateAccessToken, generateRefreshToken } from '@/lib/auth/jwt'
+import { verifyPassword } from '@/lib/auth/password'
+import { findUserByEmail } from '@/lib/db/users'
 
 class AuthError extends Error {
   constructor(message: string) {

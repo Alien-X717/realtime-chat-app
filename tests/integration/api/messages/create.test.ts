@@ -1,12 +1,13 @@
+import { NextRequest } from 'next/server'
 import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
+
 import { POST } from '@/app/api/messages/route'
 import { db, pool } from '@/db'
 import { users, conversations, conversationParticipants, messages } from '@/db/schema'
-import { NextRequest } from 'next/server'
-import { createUser } from '@/lib/db/users'
-import { createConversation } from '@/lib/db/conversations'
-import { hashPassword } from '@/lib/auth/password'
 import { generateAccessToken } from '@/lib/auth/jwt'
+import { hashPassword } from '@/lib/auth/password'
+import { createConversation } from '@/lib/db/conversations'
+import { createUser } from '@/lib/db/users'
 
 describe('POST /api/messages', () => {
   let testUser1Id: string

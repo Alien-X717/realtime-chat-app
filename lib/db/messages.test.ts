@@ -1,6 +1,11 @@
 import { describe, it, expect, beforeEach, afterAll } from 'vitest'
+
 import { db, pool } from '@/db'
 import { users, conversations, conversationParticipants, messages } from '@/db/schema'
+
+import { hashPassword } from '../auth/password'
+
+import { createConversation } from './conversations'
 import {
   createMessage,
   findMessageById,
@@ -9,8 +14,6 @@ import {
   updateMessage,
 } from './messages'
 import { createUser } from './users'
-import { createConversation } from './conversations'
-import { hashPassword } from '../auth/password'
 
 describe('Message Database Queries', () => {
   let testUser1Id: string

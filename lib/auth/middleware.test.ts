@@ -1,7 +1,8 @@
-import { describe, it, expect, beforeAll } from 'vitest'
-import { extractUserFromRequest } from './middleware'
-import { generateAccessToken } from './jwt'
 import { NextRequest } from 'next/server'
+import { describe, it, expect, beforeAll } from 'vitest'
+
+import { generateAccessToken } from './jwt'
+import { extractUserFromRequest } from './middleware'
 
 describe('Auth Middleware', () => {
   beforeAll(() => {

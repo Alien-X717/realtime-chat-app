@@ -1,12 +1,13 @@
-import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
 import { eq } from 'drizzle-orm'
+import { NextRequest } from 'next/server'
+import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
+
 import { POST } from '@/app/api/conversations/route'
 import { db, pool } from '@/db'
 import { users, conversations, conversationParticipants } from '@/db/schema'
-import { NextRequest } from 'next/server'
-import { createUser } from '@/lib/db/users'
-import { hashPassword } from '@/lib/auth/password'
 import { generateAccessToken } from '@/lib/auth/jwt'
+import { hashPassword } from '@/lib/auth/password'
+import { createUser } from '@/lib/db/users'
 
 describe('POST /api/conversations', () => {
   let testUser1Id: string

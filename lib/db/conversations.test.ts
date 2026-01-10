@@ -1,7 +1,11 @@
-import { describe, it, expect, beforeEach, afterAll } from 'vitest'
 import { eq } from 'drizzle-orm'
+import { describe, it, expect, beforeEach, afterAll } from 'vitest'
+
 import { db, pool } from '@/db'
 import { users, conversations, conversationParticipants } from '@/db/schema'
+
+import { hashPassword } from '../auth/password'
+
 import {
   createConversation,
   findConversationById,
@@ -11,7 +15,6 @@ import {
   isParticipant,
 } from './conversations'
 import { createUser } from './users'
-import { hashPassword } from '../auth/password'
 
 describe('Conversation Database Queries', () => {
   let testUser1Id: string

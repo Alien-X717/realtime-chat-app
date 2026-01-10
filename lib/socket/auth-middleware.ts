@@ -1,5 +1,5 @@
-import { Socket } from 'socket.io'
-import type { ExtendedError } from 'socket.io'
+import type { Socket , ExtendedError } from 'socket.io'
+
 import { verifyAccessToken, AccessTokenPayload } from '../auth/jwt'
 import './types' // Import type augmentation
 
