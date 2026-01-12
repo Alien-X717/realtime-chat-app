@@ -4,14 +4,13 @@
 import { createServer } from 'http'
 
 import { Server as SocketIOServer } from 'socket.io'
-import type { Socket as ClientSocket } from 'socket.io-client';
+import type { Socket as ClientSocket } from 'socket.io-client'
 import { io as Client } from 'socket.io-client'
 import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
 
 import { generateAccessToken } from '../auth/jwt'
 
 import { authMiddleware } from './auth-middleware'
-
 
 describe('Socket.io Authentication Middleware', () => {
   const testUserId = '123e4567-e89b-12d3-a456-426614174000'

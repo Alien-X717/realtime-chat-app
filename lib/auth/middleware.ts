@@ -1,6 +1,6 @@
 import type { NextRequest } from 'next/server'
 
-import type { AccessTokenPayload } from './jwt';
+import type { AccessTokenPayload } from './jwt'
 import { verifyAccessToken } from './jwt'
 
 export class AuthenticationError extends Error {
@@ -14,9 +14,7 @@ export class AuthenticationError extends Error {
  * Extract and verify user from Authorization header
  * Returns user payload if valid, null otherwise
  */
-export function extractUserFromRequest(
-  request: NextRequest
-): AccessTokenPayload | null {
+export function extractUserFromRequest(request: NextRequest): AccessTokenPayload | null {
   try {
     const authHeader = request.headers.get('Authorization')
 

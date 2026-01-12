@@ -125,7 +125,10 @@ export async function removeParticipant(conversationId: string, userId: string) 
 /**
  * Check if a user is a participant in a conversation
  */
-export async function isParticipant(conversationId: string, userId: string): Promise<boolean> {
+export async function isParticipant(
+  conversationId: string,
+  userId: string
+): Promise<boolean> {
   const [participant] = await db
     .select()
     .from(conversationParticipants)
